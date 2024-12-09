@@ -1,4 +1,4 @@
-const input = Deno.readTextFileSync("./day6/input.txt");
+const input = Deno.readTextFileSync("./day6/test.txt");
 
 const lines = input.split("\n");
 lines.pop();
@@ -82,9 +82,15 @@ function checkAndGo() {
       break;
   }
 }
+
+let obstruction = 0;
 while (isInbound(guard.position)) {
+  if (distinctPositions.has(guard.position[0] + " " + guard.position[1])) {
+    obstruction++;
+  }
   distinctPositions.add(guard.position[0] + " " + guard.position[1]);
   map[guard.position[0]][guard.position[1]] = "X";
   checkAndGo();
 }
+console.log(obstruction);
 console.log(distinctPositions.size);
